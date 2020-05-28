@@ -1,41 +1,37 @@
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var logger = require("morgan");
+"use strict";
 
-var express = require("express");
-var app = express();
+const express = require("express");
+const exphbs = require('express-handlebars');
+const mongoose = require("mongoose");
 
-app.use(logger("dev"));
-app.use(
-  bodyParser.urlencoded({
-    extended: false
-  })
-);
+const db = require("./models");
 
-app.use(express.static(process.cwd() + "/public"));
-var exphbs = require("express-handlebars");
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
+const PORT = process.env.PORT || 3000;
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost/scraper_news";
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+const index = require("./routes/index");
+const comment = require("./routes/comment");
+const articles = require("./routes/api/articles");
 
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-  console.log("Connected to Mongoose!");
-});
+const app = express();
 
-var routes = require("./controller/controller.js");
-app.use("/", routes);
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
-var port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log("Listening on PORT " + port);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static("public"));
+
+app.use("/", index);
+app.use("/comment", comment);
+app.use("/api/articles", articles);
+
+mongoose.connect(db.MONGODB_URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+}).then(() => console.log(`Connected to MongoDB ${db.MONGODB_URI}`))
+  .catch(err => console.log(err));
+
+app.listen(PORT, function () {
+  console.log("App running on port " + PORT + "!");
 });

@@ -1,20 +1,35 @@
-<div>
-    <h1 class="card z-depth-3 center-align">Read the Latest from 'The Verge'</h1>
-    <div class="row">
-        <div class="col s3"></div>
-        <h5 class="card z-depth-3 center-align col s6">Click 'Scrape' to get the latest articles</h5>
-    </div>
+{{#if article}}
+{{#each article}}
+<div class="card border-secondary mb-2">
+  <div class="card-body">
+    <h5 class="card-title">{{headline}}</h5>
+    <img class="card-img-top float-left mr-3" src="{{imageURL}}" alt="no image available"
+      style="width: 20vw; float: left">
+    <p class="card-text">
+      {{summary}}
+      <a href="{{link}}" target="_blank" class="ml-2">Read more</a>
+    </p>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">
+      <a href="/comment/{{_id}}">
+        <button type="button" class="btn btn-info float-right ml-1" style="font-size: 0.9em">
+          Comment <span class="badge badge-light">{{comments.length}}</span>
+        </button>
+      </a>
+      <button type="button" class="btn btn-danger float-right mr-1 delete-article" article-id="{{_id}}"
+        style="font-size: 0.9em">Delete</button>
+    </small>
+  </div>
 </div>
-<div class="row">
-    <div class="col s2"></div>
-    <div class="col s8 left-align">
-        {{#each article}}
-        <div class="card-panel">
-            <h4>{{this.title}}</h4>
-            <a href="/readArticle/{{this._id}}" class="waves-effect waves-light btn" id="btnSignUp">Read Article</a>
-
-        </div>
-
-        {{/each}}
-    </div>
+{{/each}}
+{{else}}
+<div class="mb-5">
+  <h4>
+    No Articles.
+    <a class="btn btn-warning" href="/scrape" role="button">
+      Try Loading Articles
+    </a>
+  </h4>
 </div>
+{{/if}}
