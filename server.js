@@ -159,7 +159,7 @@ app.get("/scrape", function (req, res) {
 
       result.link = $(this).find(".cw4lnv-5").children("a").attr("href")
 
-      result.summary = $(this).find("h2").text()
+      result.summary = $(this).find("img")
 
       result.title && result.link && result.summary && db.Article
         .create(result)
