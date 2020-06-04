@@ -4,6 +4,7 @@
 
 .jumbotron {
     text-align: center;
+    background-color: salmon;
 }
 
 img {
@@ -17,4 +18,12 @@ img {
 
 .title, .title2 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+    background: salmon;
+}
+
+.title2 {
+    text-align: center;
 }
