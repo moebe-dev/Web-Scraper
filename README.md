@@ -3,7 +3,7 @@ The Onion Web Scraper is a scraper app that captures the title, summary, and ima
 
 
 ## Getting Started
-Download the "images" folder to visualize how Friend Finder works!
+Download the "images" folder to visualize how this application works!
 
 
 ## Demo:
