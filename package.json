@@ -4,7 +4,7 @@
   "description": "\"axios\": \"^0.19.2\",\r     \"cheerio\": \"^1.0.0-rc.3\",\r     \"express\": \"^4.17.1\",\r     \"express-handlebars\": \"^4.0.4\",\r     \"mongoose\": \"^5.9.16\",\r     \"morgan\": \"^1.10.0\"",
   "main": "server.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.3",
     "express-handlebars": "^4.0.4",
     "express": "^4.17.1",
